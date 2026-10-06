@@ -1,0 +1,773 @@
+-- Deobfuscated By Ron Luraph
+local __S = {}
+
+if not isfolder then
+    function isfolder()
+        return false
+    end
+end
+
+if not makefolder then
+    function makefolder()
+    end
+end
+
+if not writefile then
+    function writefile()
+    end
+end
+
+if not readfile then
+    function readfile()
+        return nil
+    end
+end
+
+local u796 = game
+local u797 = workspace
+local u798 = getgenv
+__S[10] = hookmetamethod
+__S[11] = newcclosure
+local u799 = cloneref
+local u800 = getconnections
+local u801 = getupvalues
+local u802 = setupvalue
+local u803 = getinfo
+local u804 = islclosure
+local u805 = checkcaller
+local u806 = select
+local u807 = unpack
+local u808 = pcall
+local u809 = type
+local u810 = typeof
+local u811 = pairs
+local u812 = ipairs
+__S[23] = assert
+local u813 = warn
+local u814 = tostring
+local u815 = tonumber
+__S[19] = rawget
+local u816 = setmetatable
+local u817 = tick
+local u818 = Vector3
+local u819 = CFrame
+local u820 = Color3
+local u821 = UDim2
+local u822 = UDim
+local u823 = Instance
+local u824 = Enum
+local u825 = table
+local u826 = string
+local u827 = math
+local u828 = task
+local u829 = os
+local u830 = u799(u796:GetService("UserInputService"))
+local u831 = u799(u796:GetService("ContentProvider"))
+local u832 = u799(u796:GetService("TweenService"))
+local u833 = u799(u796:GetService("HttpService"))
+local u834 = u799(u796:GetService("TextService"))
+u799(u796:GetService("RunService"))
+u799(u796:GetService("Lighting"))
+local u835 = u799(u796:GetService("Players"))
+local u836 = u799(u796:GetService("CoreGui"))
+u799(u796:GetService("Debris"))
+local u837 = 0
+local u838 = 0
+local u839
+
+local function u840(r0)
+    u837 = u837 + 1
+    local r1 = r0 or math.random(14, 22)
+    local r2 = table.create(r1)
+
+    for r3 = 1, r1 do
+        local r8 = math.random(1, 63)
+
+        if r3 == r1 then
+            r8 = (r8 + u837 * 19 + r1 * 7) % 63 + 1
+        end
+
+        r2[r3] = string.sub("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_", r8, r8)
+    end
+
+    return table.concat(r2)
+end
+
+local function u841(r0)
+    u837 = u837 + 1
+    local r1 = r0 or math.random(12, 18)
+    local r2 = table.create(r1)
+
+    for r3 = 1, r1 do
+        local r8 = math.random(1, 63)
+
+        if r3 == r1 then
+            r8 = (r8 + u837 * 23) % 63 + 1
+        end
+
+        r2[r3] = string.sub("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_", r8, r8)
+    end
+
+    return table.concat(r2)
+end
+
+local u842 = u840(u827.random(14, 22))
+local u843 = u841(u827.random(12, 18))
+
+local function u844()
+    local u845
+
+    pcall(function()
+        if typeof(gethui) ~= "function" then
+            return
+        end
+
+        u845 = gethui()
+
+        if u845 and typeof(u799) == "function" then
+            u845 = u799(u845)
+        end
+    end)
+
+    if u845 then
+        return u845
+    end
+
+    return u836
+end
+
+local function u846(r0)
+    r0(u844())
+    r0(u836)
+    r0(u835.LocalPlayer and u835.LocalPlayer:FindFirstChildOfClass("PlayerGui"))
+end
+
+local function u847(r0)
+    u838 = u838 + 1
+    local r1 = u823.new(r0)
+    r1.Name = u840(math.random(14, 22))
+    return r1
+end
+
+local u848 = {
+    ScreenGui = true,
+    BillboardGui = true,
+    SurfaceGui = true,
+    Frame = true,
+    ScrollingFrame = true,
+    TextLabel = true,
+    TextButton = true,
+    TextBox = true,
+    ImageLabel = true,
+    ImageButton = true,
+    ViewportFrame = true,
+    VideoFrame = true,
+    CanvasGroup = true,
+    Folder = true,
+    UICorner = true,
+    UIStroke = true,
+    UIGradient = true,
+    UIPadding = true,
+    UIListLayout = true,
+    UIGridLayout = true,
+    UIAspectRatioConstraint = true,
+    UITextSizeConstraint = true,
+    UISizeConstraint = true,
+    UIScale = true,
+    UIPageLayout = true,
+    UITableLayout = true
+}
+
+local function u849(r0, ...)
+    if u848[r0] then
+        return u847(r0)
+    end
+
+    return u823.new(r0, ...)
+end
+
+local u850 = u816({}, {
+    __index = function(r0, r1)
+        if r1 == "new" then
+            return u849
+        end
+
+        return u823[r1]
+    end
+})
+
+local function u851(r0)
+    if not r0 then
+        return
+    end
+
+    r0:SetAttribute(u843, u841(math.random(14, 22)))
+    u839 = r0
+
+    if u798 then
+        u798()[u842] = r0
+        u798()._AllusiveObfuscationRegistry = {GuiRoot = r0, GlobalKey = u842, MarkerAttribute = u843}
+    end
+end
+
+local function u852()
+    local r0 = u843
+
+    u846(function(r0)
+        if not r0 then
+            return
+        end
+
+        for r3, r4 in r0:GetChildren() do
+            if r4:IsA("ScreenGui") and r4:GetAttribute(u843) ~= nil then
+                r4:Destroy()
+            end
+        end
+    end)
+end
+
+local function u853()
+    if not u798 then
+        return
+    end
+
+    local u854 = u798()._AllusiveObfuscationRegistry
+
+    if typeof(u854) ~= "table" then
+        return
+    end
+
+    if typeof(u854.GuiRoot) == "Instance" and u854.GuiRoot.Parent then
+        pcall(function()
+            u854.GuiRoot:Destroy()
+        end)
+    end
+
+    if typeof(u854.GlobalKey) == "string" then
+        local u855 = u798()[u854.GlobalKey]
+
+        if typeof(u855) == "Instance" and u855.Parent then
+            pcall(function()
+                u855:Destroy()
+            end)
+        end
+
+        u798()[u854.GlobalKey] = nil
+    end
+
+    if typeof(u854.MarkerAttribute) == "string" then
+        local u856 = u854.MarkerAttribute
+
+        u846(function(r0)
+            if not r0 then
+                return
+            end
+
+            for r2, r3 in r0:GetChildren() do
+                if r3:IsA("ScreenGui") and r3:GetAttribute(u856) ~= nil then
+                    r3:Destroy()
+                end
+            end
+        end)
+    end
+end
+
+__S[7] = function()
+    u853()
+    u852()
+
+    if u798 and u842 then
+        local r2 = u798()[u842]
+
+        if typeof(r2) == "Instance" and r2.Parent then
+            r2:Destroy()
+        end
+
+        u798()[u842] = nil
+    end
+
+    if u839 and u839.Parent then
+        u839:Destroy()
+    end
+
+    u839 = nil
+end
+
+local function u857()
+    local r0 = u847("ScreenGui")
+    r0.ResetOnSpawn = false
+    r0.IgnoreGuiInset = true
+    r0.ZIndexBehavior = u824.ZIndexBehavior.Sibling
+    r0.Parent = u844()
+    u851(r0)
+    return r0
+end
+
+local function u858()
+    local r4 = u847("ScreenGui")
+    r4.ResetOnSpawn = false
+    r4.IgnoreGuiInset = true
+    r4.ZIndexBehavior = u824.ZIndexBehavior.Sibling
+    r4:SetAttribute(u843, u841(math.random(14, 22)))
+    r4.Parent = u844()
+    return r4
+end
+
+local u859 = {new = u847}
+local u860 = u835.LocalPlayer:GetMouse()
+
+local u861 = {
+    Language = {
+        CheckboxEnabled = "Enabled",
+        CheckboxDisabled = "Disabled",
+        SliderValue = "Value",
+        DropdownSelect = "Select",
+        DropdownNone = "None",
+        DropdownSelected = "Selected",
+        ButtonClick = "Click",
+        TextboxEnter = "Enter",
+        ModuleEnabled = "Enabled",
+        ModuleDisabled = "Disabled",
+        TabGeneral = "General",
+        TabSettings = "Settings",
+        Loading = "Loading...",
+        Error = "Error",
+        Success = "Success"
+    },
+    Colors = {
+        Background = u820.fromRGB(11, 11, 17),
+        Card = u820.fromRGB(17, 17, 24),
+        CardDeep = u820.fromRGB(13, 13, 20),
+        Stroke = u820.fromRGB(36, 40, 58),
+        StrokeHot = u820.fromRGB(72, 76, 130),
+        Accent = u820.fromRGB(99, 102, 241),
+        AccentDim = u820.fromRGB(55, 58, 190),
+        AccentSoft = u820.fromRGB(172, 178, 255),
+        AccentGlow = u820.fromRGB(99, 102, 241),
+        Text = u820.fromRGB(235, 235, 245),
+        SubText = u820.fromRGB(148, 152, 185),
+        NotifyBg = u820.fromRGB(16, 16, 26),
+        Danger = u820.fromRGB(240, 70, 70),
+        Success = u820.fromRGB(72, 210, 140)
+    },
+    DefaultColors = {},
+    Connections = u816({}, {
+        __index = {
+            disconnect = function(r0, r1)
+                if not r0[r1] then
+                    return
+                end
+
+                r0[r1]:Disconnect()
+                r0[r1] = nil
+            end,
+            disconnect_all = function(r0)
+                for r2, r3 in r0 do
+                    if typeof(r3) ~= "function" then
+                        r3:Disconnect()
+                    end
+                end
+            end
+        }
+    }),
+    Util = {
+        map = function(r0, r1, r2, r3, r4, r5)
+            return (r1 - r2) * (r5 - r4) / (r3 - r2) + r4
+        end,
+        viewport_point_to_world = function(r0, r1, r2)
+            local r5 = u797.CurrentCamera:ScreenPointToRay(r1.X, r1.Y)
+            return r5.Origin + r5.Direction * r2
+        end,
+        get_offset = function(r0)
+            return r0:map(u797.CurrentCamera.ViewportSize.Y, 0, 2560, 8, 56)
+        end
+    },
+    Library = {
+        _all_modules = {},
+        _config = nil,
+        _choosing_keybind = false,
+        _blocking_drag = false,
+        _device = nil,
+        _ui_open = true,
+        _ui_scale = 1,
+        _ui_loaded = false,
+        _ui = nil,
+        _dragging = false,
+        _drag_start = nil,
+        _container_position = nil,
+        _tab = 0,
+        _active_tab_ref = nil,
+        _theme_container = nil,
+        _theme_container_stroke = nil,
+        _theme_vert_div = nil,
+        _theme_search = nil,
+        _theme_search_stroke = nil,
+        _theme_client_grad = nil,
+        _theme_pin = nil,
+        _theme_logo = nil,
+        _container_uiscale = nil,
+        _applying_theme = false,
+        _theme_pending = false,
+        _theme_debounce = nil
+    }
+}
+
+for r5_10, r6_6 in u811(u861.Colors) do
+    u861.DefaultColors[r5_10] = r6_6
+end
+
+u798().GG = {Language = u861.Language}
+local u862 = u861.Language
+local u863 = u861.Connections
+__S[3] = u861.Util
+local u864 = u861.Library
+u864.__index = u864
+local u865 = loadstring(u796:HttpGet("https://raw.githubusercontent.com/ieltxq/Library/refs/heads/main/Icons"))()
+
+local function u866(r0)
+    if not r0 then
+        return ""
+    end
+
+    if r0:find("rbxassetid://") then
+        return r0
+    end
+
+    return u865[r0] or ""
+end
+
+__S[7]()
+
+if not isfolder("Allusive") then
+    makefolder("Allusive")
+end
+
+local u867 = {}
+u867.__index = u867
+
+function u867.save(r0, u868, u869)
+    local function r4()
+        writefile("Allusive/" .. u868 .. ".json", u833:JSONEncode(u869))
+    end
+
+    local r3, r4_2 = pcall(r4)
+
+    if not r3 then
+        u813("failed to save config", r4_2)
+    end
+end
+
+function u867.load(u871, u870, u872)
+    local function r4()
+        if not isfile("Allusive/" .. u870 .. ".json") then
+            u871:save(u870, u872)
+            return
+        end
+
+        local r4 = readfile("Allusive/" .. u870 .. ".json")
+
+        if not r4 then
+            u871:save(u870, u872)
+            return
+        end
+
+        return u833:JSONDecode(r4)
+    end
+
+    local r3, r4_2 = pcall(r4)
+
+    if not r3 then
+        u813("failed to load config", r4_2)
+    end
+
+    local r3_2 = r4_2 or {_flags = {}, _keybinds = {}, _library = {}}
+    return r3_2
+end
+
+u864._config = u867:load(u796.GameId)
+__S[3] = u864._config._gui
+
+if not __S[3] then
+    __S[3] = {}
+    u864._config._gui = __S[3]
+end
+
+if __S[3].toggle_key == nil then
+    __S[3].toggle_key = "Enum.KeyCode.RightControl"
+end
+
+if __S[3].hide_minimized == nil then
+    __S[3].hide_minimized = false
+end
+
+if __S[3].bg_transparency == nil then
+    __S[3].bg_transparency = 0.04
+end
+
+__S[3] = u857()
+__S[3].ZIndexBehavior = u824.ZIndexBehavior.Global
+local u873 = u859.new("Frame")
+u873.Size = u821.new(0, 330, 1, -40)
+u873.Position = u821.new(0, 18, 1, -20)
+u873.AnchorPoint = Vector2.new(0, 1)
+u873.BackgroundTransparency = 1
+u873.ClipsDescendants = false
+u873.Parent = __S[3]
+__S[3] = u850.new("UIListLayout")
+__S[3].VerticalAlignment = u824.VerticalAlignment.Bottom
+__S[3].Padding = u822.new(0, 10)
+__S[3].Parent = u873
+
+function u864.SendNotification(r0)
+    local r6 = u859
+    local r1 = u861.Colors
+    local r7 = r0.duration or 4
+    local r8 = r0.iconColor or r1.Accent
+    local u874 = r6.new("Frame")
+    u874.Size = u821.new(1, 0, 0, 66)
+    u874.BackgroundTransparency = 1
+    u874.Parent = u873
+    local u875 = r6.new("Frame")
+    u875.Size = u821.new(1, 0, 1, 0)
+    u875.BackgroundColor3 = u820.fromRGB(16, 16, 25)
+    u875.BackgroundTransparency = 0
+    u875.BorderSizePixel = 0
+    u875.ClipsDescendants = true
+    u875.Parent = u874
+    local r2 = r6.new("UICorner")
+    r2.CornerRadius = u822.new(0, 12)
+    r2.Parent = u875
+    local r2_2 = r6.new("UIStroke")
+    r2_2.Color = r1.StrokeHot
+    r2_2.Transparency = 0.64
+    r2_2.ApplyStrokeMode = u824.ApplyStrokeMode.Border
+    r2_2.Parent = u875
+    local r2_3 = r6.new("Frame")
+    r2_3.Size = u821.new(1, 0, 0, 34)
+    r2_3.Position = u821.new(0, 0, 0, 0)
+    r2_3.BackgroundColor3 = r8
+    r2_3.BackgroundTransparency = 0.85
+    r2_3.BorderSizePixel = 0
+    r2_3.Parent = u875
+    local r3 = r6.new("UICorner")
+
+    r3.CornerRadius = u822.new(0, 12)
+    r3.Parent = r2_3
+    local r3_2 = r6.new("UIGradient")
+    r3_2.Transparency = NumberSequence.new({NumberSequenceKeypoint.new(0, 0), NumberSequenceKeypoint.new(1, 1)})
+    r3_2.Rotation = 90
+    r3_2.Parent = r2_3
+    local r2_4 = r6.new("Frame")
+    r2_4.Size = u821.new(0, 30, 0, 30)
+    r2_4.Position = u821.new(0, 13, 0.5, 0)
+    r2_4.AnchorPoint = Vector2.new(0, 0.5)
+    r2_4.BackgroundColor3 = r8
+    r2_4.BackgroundTransparency = 0.72
+    r2_4.BorderSizePixel = 0
+    r2_4.Parent = u875
+    local r3_3 = r6.new("UICorner")
+    r3_3.CornerRadius = u822.new(0, 8)
+    r3_3.Parent = r2_4
+    local r3_4 = r6.new("ImageLabel")
+    r3_4.BackgroundTransparency = 1
+    r3_4.Size = u821.new(0, 14, 0, 14)
+    r3_4.Position = u821.new(0.5, 0, 0.5, 0)
+    r3_4.AnchorPoint = Vector2.new(0.5, 0.5)
+    r3_4.Image = u866(r0.icon)
+    r3_4.ImageColor3 = r8
+    r3_4.Parent = r2_4
+    local r2_5 = r6.new("TextLabel")
+    r2_5.Text = r0.title or "Notification"
+    r2_5.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", u824.FontWeight.Bold)
+    r2_5.TextSize = 13
+    r2_5.TextColor3 = r1.Text
+    r2_5.TextTransparency = 0
+    r2_5.BackgroundTransparency = 1
+    r2_5.Position = u821.new(0, 52, 0, 9)
+    r2_5.Size = u821.new(1, -60, 0, 16)
+    r2_5.TextXAlignment = u824.TextXAlignment.Left
+    r2_5.Parent = u875
+    local r2_6 = r6.new("TextLabel")
+    r2_6.Text = r0.text or ""
+    r2_6.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", u824.FontWeight.Regular)
+    r2_6.TextSize = 11
+    r2_6.TextColor3 = r1.SubText
+    r2_6.BackgroundTransparency = 1
+    r2_6.Position = u821.new(0, 52, 0, 27)
+    r2_6.Size = u821.new(1, -60, 0, 28)
+    r2_6.TextWrapped = true
+    r2_6.TextXAlignment = u824.TextXAlignment.Left
+    r2_6.TextYAlignment = u824.TextYAlignment.Top
+    r2_6.Parent = u875
+    local r10 = r6.new("Frame")
+    r10.Size = u821.new(1, -24, 0, 3)
+    r10.Position = u821.new(0, 12, 1, -5)
+    r10.AnchorPoint = Vector2.new(0, 1)
+    r10.BackgroundColor3 = r1.Stroke
+    r10.BackgroundTransparency = 0.3
+    r10.BorderSizePixel = 0
+    r10.Parent = u875
+    local r1_2 = r6.new("UICorner")
+    r1_2.CornerRadius = u822.new(0, 2)
+    r1_2.Parent = r10
+    local r20 = r6.new("Frame")
+    r20.Size = u821.new(1, 0, 1, 0)
+    r20.BackgroundColor3 = r8
+    r20.BackgroundTransparency = 0.15
+    r20.BorderSizePixel = 0
+    r20.Parent = r10
+    local r1_3 = r6.new("UICorner")
+    r1_3.CornerRadius = u822.new(0, 2)
+    r1_3.Parent = r20
+    u875.Position = u821.new(-1.08, 0, 0, 0)
+    u832:Create(u875, TweenInfo.new(0.52, u824.EasingStyle.Quint, u824.EasingDirection.Out), {Position = u821.new(0, 0, 0, 0)}):Play()
+    u832:Create(r20, TweenInfo.new(r7 - 0.04, u824.EasingStyle.Linear), {Size = u821.new(0, 0, 1, 0)}):Play()
+
+    task.delay(r7, function()
+        u832:Create(u875, TweenInfo.new(0.38, u824.EasingStyle.Quint, u824.EasingDirection.In), {Position = u821.new(-1.08, 0, 0, 0)}):Play()
+
+        task.delay(0.4, function()
+            u874:Destroy()
+        end)
+    end)
+end
+
+function u864.get_screen_scale(r0)
+    local r1 = u797.CurrentCamera.ViewportSize.X / 1400
+
+    if r0._device == "Mobile" then
+        r0._ui_scale = math.clamp(r1 * 0.97, 0.68, 0.9)
+    else
+        r0._ui_scale = math.clamp(r1, 0.5, 1.2)
+    end
+end
+
+function u864.get_device(r0)
+    if not u830.TouchEnabled and u830.KeyboardEnabled and u830.MouseEnabled then
+        r0._device = "PC"
+    elseif u830.TouchEnabled then
+        r0._device = "Mobile"
+    elseif u830.GamepadEnabled then
+        r0._device = "Console"
+    else
+        r0._device = "Unknown"
+    end
+end
+
+function u864.removed(r0, r1)
+    r0._ui.AncestryChanged:Once(r1)
+end
+
+function u864.flag_type(r0, r1, r2)
+    if not u864._config._flags[r1] then
+        return
+    end
+
+    return typeof(u864._config._flags[r1]) == r2
+end
+
+function u864.remove_table_value(r0, r1, r2)
+    for r8, r9 in r1 do
+        if r9 == r2 then
+            table.remove(r1, r8)
+            return
+        end
+    end
+end
+
+function u864.new()
+    local r4 = setmetatable({_loaded = false}, u864)
+    r4:create_ui()
+    return r4
+end
+
+function u864.create_ui(u876)
+    local r4 = u859;
+
+    (function()
+        local r7 = u864._config._gui
+
+        if not r7 or not r7.colors then
+            return
+        end
+
+        for r1, r2 in pairs(r7.colors) do
+            if type(r2) == "table" and r2.H ~= nil and u861.Colors[r1] then
+                u861.Colors[r1] = u820.fromHSV(r2.H, r2.S, r2.V)
+            end
+        end
+
+        local r9 = u861.Colors
+
+        if r7.colors.Stroke then
+            local r6 = r9.Stroke
+            r9.StrokeHot = u820.new(math.clamp(r6.R * 1.2 + 0.05, 0, 1), math.clamp(r6.G * 1.2 + 0.05, 0, 1), math.clamp(r6.B * 1.22 + 0.06, 0, 1))
+        end
+
+        if r7.colors.Accent then
+            local r11 = r9.Accent
+            r9.AccentSoft = u820.new(math.clamp(r11.R * 0.55 + 0.42, 0, 1), math.clamp(r11.G * 0.55 + 0.42, 0, 1), math.clamp(r11.B * 0.58 + 0.45, 0, 1))
+            r9.AccentDim = u820.new(math.clamp(r11.R * 0.42, 0, 1), math.clamp(r11.G * 0.42, 0, 1), math.clamp(r11.B * 0.48, 0, 1))
+            r9.AccentGlow = r11
+        end
+
+        if r7.colors.Card then
+            local r0 = r9.Card
+            r9.CardDeep = u820.new(r0.R * 0.78, r0.G * 0.78, r0.B * 0.8)
+        end
+    end)()
+
+    local u877 = u861.Colors
+    local u878 = u857()
+    local u879 = r4.new("Frame")
+    u879.ClipsDescendants = true
+    u879.AnchorPoint = Vector2.new(0.5, 0.5)
+    u879.Name = "Container"
+    u879.BackgroundTransparency = u864._config._gui and u864._config._gui.bg_transparency or 0.04
+    u879.BackgroundColor3 = u877.Background
+    u879.Position = u821.new(0.5, 0, 0.5, 0)
+    u879.Size = u821.new(0, 0, 0, 0)
+    u879.Active = true
+    u879.BorderSizePixel = 0
+    u879.Parent = u878
+    local r2 = r4.new("UICorner")
+    r2.CornerRadius = u822.new(0, 18)
+    r2.Parent = u879
+    local r2_2 = r4.new("UIStroke")
+    r2_2.Color = u877.StrokeHot
+    r2_2.Transparency = 0.6
+    r2_2.ApplyStrokeMode = u824.ApplyStrokeMode.Border
+    r2_2.Parent = u879
+    local u880 = r4.new("Frame")
+    u880.BackgroundTransparency = 1
+    u880.Name = "Handler"
+    u880.Size = u821.new(0, 698, 0, 479)
+    u880.BorderSizePixel = 0
+    u880.Parent = u879
+    local u881 = r4.new("Frame")
+    u881.Name = "Search"
+    u881.Size = u821.new(0, 32, 0, 32)
+    u881.Position = u821.new(1, -14, 0, 10)
+    u881.AnchorPoint = Vector2.new(1, 0)
+    u881.BackgroundColor3 = u877.CardDeep
+    u881.BackgroundTransparency = 0.3
+    u881.BorderSizePixel = 0
+    u881.Parent = u880
+    local r3 = r4.new("UICorner")
+    r3.CornerRadius = u822.new(1, 0)
+    r3.Parent = u881
+    local r10 = r4.new("UIStroke")
+    r10.Color = u877.StrokeHot
+    r10.Transparency = 0.5
+    r10.Parent = u881
+    local r11 = r4.new("ImageButton")
+    r11.Size = u821.new(0, 15, 0, 15)
+    r11.Position = u821.new(0, 8, 0.5, 0)
+    r11.AnchorPoint = Vector2.new(0, 0.5)
+    r11.ImageColor3 = u877.Accent
+    r11.BackgroundTransparency = 1
+    r11.Image = u866("search")
+    r11.Parent = u881
+    local u882 = r4.new("TextBox")
+    u882.Size = u821.new(1, -38, 1, 0)
+    u882.Positi
